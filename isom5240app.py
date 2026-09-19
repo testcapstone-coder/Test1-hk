@@ -27,54 +27,73 @@ st.markdown("""
         );
     }
 
-    /* Main title */
+    /* Main title box */
     .main-title {
         text-align: center;
         padding: 30px 20px;
         border-radius: 18px;
         background: linear-gradient(135deg, #4F46E5, #7C3AED);
-        color: white;
         margin-bottom: 25px;
         box-shadow: 0 8px 25px rgba(79, 70, 229, 0.20);
     }
 
+    /* Main title */
     .main-title h1 {
+        color: #FFD166;
         margin: 0;
         font-size: 38px;
     }
 
+    /* Main subtitle */
     .main-title p {
+        color: #E0E7FF;
         margin-top: 10px;
         font-size: 17px;
-        opacity: 0.9;
     }
 
-    /* Content cards */
+    /* Welcome card */
     .card {
         background-color: white;
         padding: 22px;
         border-radius: 15px;
-        margin: 15px 0;
+        margin: 15px 0 25px 0;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
         border-left: 5px solid #6366F1;
     }
 
-    /* Button styling */
-    div.stButton > button {
-        background: linear-gradient(90deg, #4F46E5, #7C3AED);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        padding: 10px 25px;
-        font-weight: 600;
-        transition: 0.3s;
+    /* Welcome title */
+    .card h3 {
+        color: #7C3AED;
+        margin-top: 0;
     }
 
-    div.stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(79, 70, 229, 0.30);
-        color: white;
-        border: none;
+    /* Welcome text */
+    .card p {
+        color: #475569;
+        font-size: 16px;
+    }
+
+    /* Upload section title */
+    .upload-title {
+        color: #E11D48;
+        font-size: 27px;
+        font-weight: 700;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    /* Interaction section title */
+    .interaction-title {
+        color: #059669;
+        font-size: 27px;
+        font-weight: 700;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    /* Normal Streamlit text */
+    .stMarkdown p {
+        color: #374151;
     }
 
     /* File uploader */
@@ -82,7 +101,35 @@ st.markdown("""
         background-color: white;
         padding: 15px;
         border-radius: 12px;
-        border: 1px solid #E5E7EB;
+        border: 1px solid #C7D2FE;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    /* File uploader label */
+    [data-testid="stFileUploader"] label {
+        color: #4338CA !important;
+        font-weight: 600;
+    }
+
+    /* Button */
+    div.stButton > button {
+        background: linear-gradient(90deg, #4F46E5, #7C3AED);
+        color: #FFFFFF;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 25px;
+        font-weight: 600;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    /* Button hover */
+    div.stButton > button:hover {
+        background: linear-gradient(90deg, #7C3AED, #DB2777);
+        color: #FFFFFF;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(79, 70, 229, 0.30);
+        border: none;
     }
 
 </style>
@@ -90,50 +137,56 @@ st.markdown("""
 
 
 # --------------------------------------------------
-# Header
+# Main Header
 # --------------------------------------------------
 st.markdown("""
 <div class="main-title">
     <h1>🚀 ISOM5240 Streamlit Demo</h1>
-    <p>Interactive Streamlit application hosted on Hugging Face</p>
+    <p>Interactive Streamlit Application on Hugging Face</p>
 </div>
 """, unsafe_allow_html=True)
 
 
 # --------------------------------------------------
-# Introduction
+# Welcome Section
 # --------------------------------------------------
 st.markdown("""
 <div class="card">
-    <h3>👋 Welcome!</h3>
+    <h3>👋 Welcome to the Demo!</h3>
     <p>
-        Welcome to a demo app showcasing some basic
-        <b>Streamlit components</b>.
+        This application showcases some basic
+        <b>Streamlit components</b> in a colorful and interactive interface.
     </p>
-    <p>✨ Upload an image below and interact with the app!</p>
+    <p>
+        Upload an image below and explore the different features of the app.
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
 
 # --------------------------------------------------
-# Image uploader
+# Image Upload Section
 # --------------------------------------------------
-st.subheader("📸 Upload an Image")
+st.markdown(
+    '<div class="upload-title">📸 Upload Your Image</div>',
+    unsafe_allow_html=True
+)
+
+st.write("Choose a JPG, JPEG or PNG image from your computer.")
 
 uploaded_image = st.file_uploader(
-    "Choose a JPG or PNG image",
+    "Select your image",
     type=["jpg", "jpeg", "png"]
 )
 
 
 # --------------------------------------------------
-# Display uploaded image
+# Display Uploaded Image
 # --------------------------------------------------
 if uploaded_image is not None:
 
     with st.spinner("✨ Loading your image..."):
         time.sleep(1)
-
         image = Image.open(uploaded_image)
 
     st.success("✅ Image uploaded successfully!")
@@ -146,11 +199,20 @@ if uploaded_image is not None:
 
 
 # --------------------------------------------------
-# Button interaction
+# Divider
 # --------------------------------------------------
 st.divider()
 
-st.subheader("🎯 Try an Interaction")
+
+# --------------------------------------------------
+# Interaction Section
+# --------------------------------------------------
+st.markdown(
+    '<div class="interaction-title">🎯 Try an Interaction</div>',
+    unsafe_allow_html=True
+)
+
+st.write("Click the button below to see what happens!")
 
 if st.button("✨ Click Me"):
     st.balloons()
